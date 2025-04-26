@@ -16,22 +16,26 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@Table(name = "users")
 public class UserModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long user_id;
+    private long userId;
 
     private String userName;
+
+    @Column(unique = true)
+    private String emailId;
 
     private String password;
 
     private String imageUrl;
 
     @OneToMany(mappedBy = "follower",cascade = CascadeType.ALL ,orphanRemoval = true)
-    private Set<FollowingModel> followers;
+    private List<FollowingModel> followers;
 
     @OneToMany(mappedBy = "following",cascade = CascadeType.ALL ,orphanRemoval = true)
-    private Set<FollowingModel> following;
+    private List<FollowingModel> following;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -9,6 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+@Table(name = "followers_following")
 public class FollowingModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
