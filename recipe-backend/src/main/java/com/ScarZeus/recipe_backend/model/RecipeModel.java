@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Entity
 @Getter
@@ -39,6 +40,15 @@ public class RecipeModel {
 
     @Column(name = "dateTime")
     private Date dateTime;
+
+    @Column(name = "stepsToCook")
+    private List<String> steps;
+
+    @Column(name = "imagePublicId")
+    private String publicID;
+
+    @Column(name = "imageUrl")
+    private String imageUrl;
 
     @Column(name = "cuisine")
     @Enumerated(EnumType.STRING)

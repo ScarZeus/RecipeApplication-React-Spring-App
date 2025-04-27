@@ -31,6 +31,8 @@ public class UserModel implements UserDetails {
 
     private String imageUrl;
 
+    private String imagePublicId;
+
     @OneToMany(mappedBy = "follower",cascade = CascadeType.ALL ,orphanRemoval = true)
     private List<FollowingModel> followers;
 

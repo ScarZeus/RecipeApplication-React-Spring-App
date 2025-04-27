@@ -6,8 +6,10 @@ import com.ScarZeus.recipe_backend.model.enumModels.Cuisine;
 import com.ScarZeus.recipe_backend.repository.RecipeRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -15,14 +17,23 @@ import java.util.Optional;
 public class RecipeService {
     private final RecipeRepo recipeRepo;
     private final UserService userService;
+    private final CloudinaryService cloudinaryService;
 
-    public RecipeModel saveRecipe(RecipeModel recipe){
+    public RecipeModel saveRecipe(long id,RecipeModel recipe, MultipartFile image){
+        Map imageDetails = cloudinaryService.uploadImage(image);
+        UserModel user = userService.getUser(id);
+        recipe.setImageUrl(imageDetails.get("secure_url").toString());
+        recipe.setPublicID(imageDetails.get("public_id").toString());
+        recipe.setUser(user);
         return recipeRepo.save(recipe);
     }
 
-    public void deleteRecipe(long id) throws Exception {
-        if(recipeRepo.existsById(id)){
-            recipeRepo.deleteById(id);
+    public void deleteRecipe(long recipeID,long userID) throws Exception {
+        UserModel user = userService.getUser(userID);
+        RecipeModel recipe = getRecipe(recipeID);
+        if(recipeRepo.existsById(recipeID)){
+            cloudinaryService.deleteImage(recipe.getPublicID());
+            recipeRepo.deleteByRecipeIdAndUser(recipeID,user);
         }
         else{
             throw new RuntimeException("Recipe Does not Exist");
@@ -79,5 +90,19 @@ public class RecipeService {
             throw new RuntimeException("No recipes are found");
         }
         return userRecipes;
+    }
+
+    public void deleteAllRecipeOfUser(long userID) throws Exception {
+        UserModel user = userService.getUser(userID);
+        if(recipeRepo.existsByUser(user)){
+            List<RecipeModel> allRecipes = getAllRecipes(userID);
+            for(RecipeModel recipe:allRecipes){
+                cloudinaryService.deleteImage(recipe.getPublicID());
+                deleteRecipe(recipe.getRecipeId(),userID);
+            }
+        }
+        else{
+            throw new RuntimeException("Recipe Does not Exist");
+        }
     }
 }

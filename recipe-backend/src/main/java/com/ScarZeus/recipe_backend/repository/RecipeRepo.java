@@ -15,4 +15,8 @@ public interface RecipeRepo extends JpaRepository<RecipeModel,Long> {
     List<RecipeModel> findAllByRecipeName(@Param("recipeName") String recipeName);
 
     List<RecipeModel> findAllByUser(UserModel user);
+
+    void deleteByRecipeIdAndUser(long recipeID, UserModel user);
+
+    boolean existsByUser(UserModel user);
 }

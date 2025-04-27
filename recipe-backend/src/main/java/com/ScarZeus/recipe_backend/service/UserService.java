@@ -6,8 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -16,6 +17,8 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepo userRepo;
+    private final RecipeService recipeService;
+    private final CloudinaryService cloudinaryService;
 
     public UserModel getUser(String emailId) {
         return Optional.ofNullable(userRepo.findByEmailId(emailId)).get()
@@ -23,15 +26,20 @@ public class UserService {
 
     }
 
-    public UserModel addUser(UserModel user){
+    public UserModel addUser(UserModel user, MultipartFile image){
         if(userRepo.existsByEmailId(user.getEmailId())){
             throw new RuntimeException("User Already exists");
         }
+        Map imageDetails = cloudinaryService.uploadImage(image);
+        user.setImageUrl(imageDetails.get("secure_url").toString());
+        user.setImagePublicId(imageDetails.get("public_id").toString());
         return userRepo.save(user);
     }
 
-    public void deleteUser(long id){
+    public void deleteUser(long id) throws Exception {
         if(userRepo.existsById(id)){
+            recipeService.deleteAllRecipeOfUser(id);
+            cloudinaryService.deleteImage(getUser(id).getImagePublicId());
             userRepo.deleteById(id);
         }
         else {
