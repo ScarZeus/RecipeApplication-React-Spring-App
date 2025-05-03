@@ -2,6 +2,7 @@ package com.ScarZeus.recipe_backend.controller;
 
 import com.ScarZeus.recipe_backend.model.RecipeModel;
 import com.ScarZeus.recipe_backend.service.RecipeService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,0 +1,12 @@
+export enum Cuisine{
+    ITALIAN = "ITALIAN",
+  CHINESE = "CHINESE",
+  INDIAN = "INDIAN",
+  JAPANESE = "JAPANESE",
+  MEXICAN = "MEXICAN",
+  FRENCH = "FRENCH",
+  THAI = "THAI",
+  GREEK = "GREEK",
+  SPANISH = "SPANISH",
+  TURKISH = "TURKISH"
+}

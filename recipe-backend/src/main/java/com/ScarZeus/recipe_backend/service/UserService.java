@@ -1,10 +1,14 @@
 package com.ScarZeus.recipe_backend.service;
 
 import com.ScarZeus.recipe_backend.model.UserModel;
+import com.ScarZeus.recipe_backend.model.authModels.AuthRequestModel;
+import com.ScarZeus.recipe_backend.model.authModels.AuthResponseModel;
 import com.ScarZeus.recipe_backend.repository.UserRepo;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,8 +17,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@AllArgsConstructor
 public class UserService {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private final UserRepo userRepo;
     private final RecipeService recipeService;
@@ -64,4 +70,14 @@ public class UserService {
         return user;
     }
 
+    public boolean verifyUser(AuthRequestModel request) {
+        UserModel user = getUser(request.getEmail());
+        if(user.getEmailId().equals(request.getEmail()) &&
+                user.getPassword()
+                .equals(passwordEncoder
+                        .encode(request.getPassword()))){
+            return true;
+        }
+        return false;
+    }
 }

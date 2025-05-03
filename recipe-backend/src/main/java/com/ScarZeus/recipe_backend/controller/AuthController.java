@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final JWTServices jwtService;
+//    private final JWTServices jwtService;
 
-    @GetMapping("/login")
-    public ResponseEntity<AuthResponseModel> login(@RequestBody AuthRequestModel request){
-        try(AuthResponseModel response = jwtService.getJwtToken(request)){
-            return ResponseEntity.ok(response);
-        }
-        catch (Exception e){
-            return ResponseEntity.badRequest().body(null);
-        }
-    }
+//    @GetMapping("/login")
+//    public ResponseEntity<AuthResponseModel> login(@RequestBody AuthRequestModel request){
+//        try(AuthResponseModel response = jwtService.getJwtToken(request)){
+//            return ResponseEntity.ok(response);
+//        }
+//        catch (Exception e){
+//            return ResponseEntity.badRequest().body(null);
+//        }
+//    }
 
 }
