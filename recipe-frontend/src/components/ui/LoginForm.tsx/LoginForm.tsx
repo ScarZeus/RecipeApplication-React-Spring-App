@@ -1,10 +1,11 @@
 import 'index.css';
-import React from 'react';
+import React, { useState } from 'react';
+import { AuthRequestModel } from '../../../models/authModels/authRequestModel';
 
 const LoginForm:React.FC=()=>{
-    const[isLoggedIn.setLogin] 
+    
     return(
-        <form>
+        <form onChange={e.target.value}>
 
         </form>
     );
