@@ -70,12 +70,19 @@ public class UserService {
         return user;
     }
 
-    public boolean verifyUser(AuthRequestModel request) {
-        UserModel user = getUser(request.getEmail());
-        if(user.getEmailId().equals(request.getEmail()) &&
-                user.getPassword()
-                .equals(passwordEncoder
-                        .encode(request.getPassword()))){
+//    public boolean verifyUser(AuthRequestModel request) {
+//        UserModel user = getUser(request.getEmail());
+//        if(user.getEmailId().equals(request.getEmail()) &&
+//                user.getPassword()
+//                .equals(passwordEncoder
+//                        .encode(request.getPassword()))){
+//            return true;
+//        }
+//        return false;
+//    }
+
+    public boolean isUserExist(String email){
+        if(userRepo.existsByEmailId(email)){
             return true;
         }
         return false;
