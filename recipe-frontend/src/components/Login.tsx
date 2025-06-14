@@ -16,7 +16,7 @@ const Login:React.FC=()=>{
     formData.forEach((value, key) => {
         data[key] = value.toString(); // You can customize type as needed
     });
-        setauthRequest(data);
+        // setauthRequest(data);
 
     }
     return(
@@ -30,3 +30,4 @@ const Login:React.FC=()=>{
         </div>
     );
 }
+export default Login;
