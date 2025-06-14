@@ -1,10 +1,8 @@
 package com.ScarZeus.recipe_backend.service;
 
 import com.ScarZeus.recipe_backend.model.UserModel;
-import com.ScarZeus.recipe_backend.model.authModels.AuthRequestModel;
-import com.ScarZeus.recipe_backend.model.authModels.AuthResponseModel;
+
 import com.ScarZeus.recipe_backend.repository.UserRepo;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

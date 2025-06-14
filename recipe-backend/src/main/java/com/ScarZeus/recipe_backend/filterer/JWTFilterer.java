@@ -2,8 +2,13 @@ package com.ScarZeus.recipe_backend.filterer;
 
 import com.ScarZeus.recipe_backend.service.authServices.AppDetailService;
 import com.ScarZeus.recipe_backend.service.authServices.JWTServices;
+import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,10 +24,10 @@ public class JWTFilterer extends OncePerRequestFilter {
 
     private final JWTServices jwtService;
     private final AppDetailService userDetailsService;
+
+
     @Override
-    protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request,
-                                    jakarta.servlet.http.HttpServletResponse response,
-                                    jakarta.servlet.FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         final String jwtToken;
         final String userEmail;

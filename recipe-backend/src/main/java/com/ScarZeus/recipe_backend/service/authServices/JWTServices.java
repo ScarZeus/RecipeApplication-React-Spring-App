@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 
+import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -64,9 +65,10 @@ public class JWTServices {
     private Claims extractClaims(String jwtToken) {
         return Jwts
                 .parser()
-                .setSigningKey(getSignInKey())
-                .parseClaimsJwt(jwtToken)
-                .getBody();
+                .verifyWith((SecretKey) getSignInKey())
+                .build()
+                .parseSignedClaims(jwtToken)
+                .getPayload();
     }
 
     private Date extractExpiration(String jwtToken){
