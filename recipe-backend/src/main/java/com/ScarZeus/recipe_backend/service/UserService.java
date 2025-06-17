@@ -21,7 +21,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     private final UserRepo userRepo;
-    private final RecipeService recipeService;
+//    private final RecipeService recipeService;
     private final CloudinaryService cloudinaryService;
 
     public UserModel getUser(String emailId) {
@@ -40,16 +40,16 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    public void deleteUser(long id) throws Exception {
-        if(userRepo.existsById(id)){
-            recipeService.deleteAllRecipeOfUser(id);
-            cloudinaryService.deleteImage(getUser(id).getImagePublicId());
-            userRepo.deleteById(id);
-        }
-        else {
-            throw new RuntimeException("User does not exist");
-        }
-    }
+//    public void deleteUser(long id) throws Exception {
+//        if(userRepo.existsById(id)){
+//            recipeService.deleteAllRecipeOfUser(id);
+//            cloudinaryService.deleteImage(getUser(id).getImagePublicId());
+//            userRepo.deleteById(id);
+//        }
+//        else {
+//            throw new RuntimeException("User does not exist");
+//        }
+//    }
 
     public void updateUser(UserModel user){
         if(userRepo.existsByEmailId(user.getEmailId())){

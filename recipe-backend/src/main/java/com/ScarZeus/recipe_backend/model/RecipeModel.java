@@ -33,6 +33,7 @@ public class RecipeModel {
     private int noOfServings;
 
     @Column(name = "ingredients")
+    @ElementCollection(fetch = FetchType.EAGER)
     private HashMap<String,Integer> ingridients;
 
     @Column(name = "rating")

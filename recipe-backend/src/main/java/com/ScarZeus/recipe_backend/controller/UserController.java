@@ -51,13 +51,13 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("{userId}/delete")
-    public ResponseEntity<String> deleteUser(@PathVariable("userId") long id){
-        try {
-            userService.deleteUser(id);
-            return ResponseEntity.ok("Success");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed");
-        }
-    }
+//    @DeleteMapping("{userId}/delete")
+//    public ResponseEntity<String> deleteUser(@PathVariable("userId") long id){
+//        try {
+//            userService.deleteUser(id);
+//            return ResponseEntity.ok("Success");
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body("Failed");
+//        }
+//    }
 }

@@ -12,6 +12,4 @@ public interface UserRepo extends JpaRepository<UserModel,Long> {
     Optional<UserModel> findByEmailId(String emailId);
 
     boolean existsByEmailId(String emailId);
-
-    List<UserModel> findAllByFollowers(long id);
 }

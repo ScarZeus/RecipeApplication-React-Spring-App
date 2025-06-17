@@ -13,7 +13,7 @@ import java.util.Map;
 @Service
 public class CloudinaryService {
     Dotenv dotenv = Dotenv.load();
-    private Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY-URL"));
+    private Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY_URL"));
 
     public Map uploadImage(MultipartFile image){
         try {

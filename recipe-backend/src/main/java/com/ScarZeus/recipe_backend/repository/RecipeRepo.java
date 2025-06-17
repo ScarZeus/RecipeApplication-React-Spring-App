@@ -11,7 +11,8 @@ import java.util.List;
 
 @Repository
 public interface RecipeRepo extends JpaRepository<RecipeModel,Long> {
-    @Query(value = "SELECT r FROM recipes r WHERE m.recipe_name %:recipeName%")
+
+    @Query("SELECT r FROM RecipeModel r WHERE LOWER(r.recipeName) LIKE LOWER(CONCAT('%', :recipeName, '%'))")
     List<RecipeModel> findAllByRecipeName(@Param("recipeName") String recipeName);
 
     List<RecipeModel> findAllByUser(UserModel user);
