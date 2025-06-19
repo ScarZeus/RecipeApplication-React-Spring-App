@@ -1,0 +1,12 @@
+.form-container form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-container button{
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
+    padding: 2px    ;
+}
