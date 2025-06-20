@@ -22,6 +22,7 @@ const LoginForm:React.FC=()=>{
 
     return(
         <div className='form-container'>
+            <h2>Login</h2>
             <form> 
                 <input type="text" name="emailId" id="emailId" placeholder="Enter your user emailID"/>
                 <input type = "password" name="password" id="password" placeholder="Enter your Password" />
